@@ -6,21 +6,23 @@
 
  ** PROBLEMA **
 
- Per la realizzazione del progetto è stato necessario trovare una 
- soluzione a due problemi fondamentali:
+ Per la realizzazione del progetto è stato necessario trovare
+ una soluzione a due problemi fondamentali:
 
  * le API di Twitter non supportano chiamate di tipo CORS
    (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 
  * realizzando una applicazione interamente client side si rendono
-   visibili, nel codice JavaScript, il 'consumer_key' e il 'consumer_secret' 
-   necessarie per l'interazione tra l'applicazione e le API di Twitter
+   visibili, nel codice JavaScript, il 'consumer_key' e il 
+   'consumer_secret' necessarie per l'interazione tra l'applicazione
+   e le API di Twitter
 
  I due problemi sono, in realtà, correlati tra di loro.
- Gli sviluppatori di Twitter, infatti, scoraggiano la realizzazione di 
- applicazioni interamente client side per evitare disclosure delle
- 'consumer_key' e 'consumer_secret' che potrebbero essere utilizzate da 
- terze parti. Dunque, per questo motivo non realizzano il supporto a CORS.
+ Gli sviluppatori di Twitter, infatti, scoraggiano la realizzazione
+ di applicazioni interamente client side per evitare disclosure delle
+ 'consumer_key' e 'consumer_secret' che potrebbero essere utilizzate
+ da terze parti. Dunque, per questo motivo non realizzano il 
+ supporto a CORS.
 
  ** SOLUZIONE **
 
@@ -43,8 +45,8 @@
    const PROXY = "twitter-proxy.php?url=";
 
  La 'consumer_key' e la 'consumer_secret' incluse nel file
- "twitter-proxy.php" sono legate alla callback URL
- "http://127.0.0.1/COWS/". Se si vogliono utilizzare questi dati,
- dunque, è necessario hostare la directory COWS su un server web locale
- che permetta di raggiungere l'applicazione all'url indicato sopra.
+ "twitter-proxy.php" sono legate alla callback URL "http://127.0.0.1/COWS/".
+ Se si vogliono utilizzare questi dati, dunque, è necessario hostare la directory
+ COWS su un server web locale che permetta di raggiungere l'applicazione all'url
+ indicato sopra.
 

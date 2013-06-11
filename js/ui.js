@@ -11,10 +11,6 @@ function hideApp() {
   });
 }
 
-function showHelp(){
-  
-}
-
 function addTimeline(name){
   var closebutton = '';
   var offset = '';
@@ -38,7 +34,8 @@ function addTimeline(name){
     offset = 'offset3';
   }
   $('#timelines').append('<div id="timeline-'+name+'" class="span5 '+offset+' content-main">\
-                          <div class="content-header">'+closebutton+'<span><b>'+name+'</b></span><br><span id="counter-'+name+'" class="counter"></span><br>\
+                          <div class="content-header">'+closebutton+'<span><b>'+name+'</b></span>\
+                          <br><span id="counter-'+name+'" class="counter"></span><br>\
                           <a id="refresh-'+name+'" class="btn btn-success" href="#""><i class="icon-refresh"></i> Refresh</a></div>\
                           <div class="nothing-new alert alert-info text-center" id="nothing-'+name+'"><b>Nothing new</b>, try again later!</div>\
                           <div class="error-message alert alert-error text-center" id="error-'+name+'"></div>\

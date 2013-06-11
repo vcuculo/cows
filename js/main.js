@@ -1,7 +1,4 @@
 
-// array of timelines
-var twArray = [];
-
 $(document).ready(function () {
   // check if token exists
   var token = localStorage["twitter_token"];

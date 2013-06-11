@@ -6,6 +6,9 @@ const ACCESS_URL = "oauth/access_token";
 const HOME_TIMELINE_URL = "1.1/statuses/home_timeline.json";
 const USER_TIMELINE_URL = "1.1/statuses/user_timeline.json";
 
+// array of timelines
+var twArray = [];
+
 function Twitter(name){
   // array of tweets:
   // https://dev.twitter.com/docs/platform-objects/tweets
