@@ -20,8 +20,8 @@ body {
 .title {
   margin-left: -305px;
   font: 100pt 'Zeyada';
-  color: #ababab;
-  /*text-shadow: 0 0 20px #fff;*/
+  color: #fff;
+  text-shadow: 0 0 20px #fff;
   z-index: 2;
 }
 
