@@ -1,0 +1,120 @@
+body {
+  background-color: #ababab;
+  font: 16px Tahoma, Helvetica, Arial, Sans-Serif;
+}
+
+.twitter {
+  margin-top: 20px;
+}
+
+.twitter img {
+  box-shadow: 3px 3px 7px #777;
+}
+
+.logo {
+  margin-left: -100px;
+  width: 400px;
+  z-index: 1;
+}
+
+.title {
+  margin-left: -305px;
+  font: 100pt 'Zeyada';
+  color: #FFF;
+  text-shadow: 0 0 20px #fff;
+  z-index: 2;
+}
+
+.info {
+  margin-top: 20px;
+  font: 16px Tahoma, Helvetica, Arial, Sans-Serif;
+  color: #504f4f;
+  text-shadow: 0px 2px 1px #bbbaba;
+}
+
+.author {
+  margin-top: 20px;
+  font: 15px 'Courier New';
+  color: #504f4f;
+  text-shadow: 0px 2px 1px #bbbaba;
+}
+
+.img-rounded {
+  border: 1px solid #ababab;
+}
+
+#app {
+  display:none;
+  margin: 40px; 
+}
+
+#timelines {
+  margin: 50px;
+}
+
+
+.counter {
+  font-weight: bold;
+  float: left;
+}
+
+div[id*='error-'] {
+  display:none;
+}
+
+.nothing-new {
+  display:none;
+}
+
+.active {
+  background-color: #FF0;
+}
+
+.content-main {
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+  box-shadow: 0 1px 10px rgba(0,0,0,.1);
+  background-color: #FFFFFF;
+  border : 1px solid #E8E8E8;
+}
+
+.content-header {
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+
+  border-bottom: 1px solid #E8E8E8;
+  min-height: 20px;
+  padding: 12px;
+}
+
+.content-body > div {
+  border-bottom: 1px solid #E8E8E8;
+  min-height: 51px;
+  padding: 9px 12px;
+  position: relative;
+}
+
+.content-body > div .elem {
+  margin-left: 58px;
+}
+
+.content-body > div img {
+  cursor: pointer;
+  left: 12px;
+  position: absolute;
+  top: 12px;
+}
+
+.content-body > div p {
+  color: #333333;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.content-body > div span {
+  float: right;
+  color: #999999;
+  font-size: 12px;
+}
