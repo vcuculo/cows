@@ -13,7 +13,8 @@ $config = array(
         'consumer_key' => '',
         'consumer_secret' => '',
 	'use_whitelist' => false, // If you want to only allow some requests to use this script.
-	'base_url' => 'http://api.twitter.com/'
+	'base_url' => 'https://api.twitter.com/',
+        'oauth_version' => '1'
 );
  
 // Only allow certain requests to twitter. Stop randoms using your server as a proxy.
@@ -52,6 +53,9 @@ foreach (getallheaders() as $name => $value)
     else if ($name == 'oauth_token_secret'){
       $config['oauth_access_token_secret'] = $value;
     }
+    else if ($name == 'oauth_version'){
+      $config['oauth_version'] = $value;
+    }
 }
 
 // We'll get the URL from $_GET[]. Make sure the url is url encoded, for example encodeURIComponent('statuses/user_timeline.json?screen_name=MikeRogers0&count=10&include_rts=false&exclude_replies=true')
@@ -77,7 +81,9 @@ $base_url = $config['base_url'].$url_parts['path']; // Url without the query.
 * Code below from http://stackoverflow.com/questions/12916539/simplest-php-example-retrieving-user-timeline-with-twitter-api-version-1-1 by Rivers 
 * with a few modfications by Mike Rogers to support variables in the URL nicely
 */
- 
+$postfields = '';
+$contenttype = '';
+
 function buildBaseString($baseURI, $method, $params) {
 	$r = array();
 	ksort($params);
@@ -86,45 +92,65 @@ function buildBaseString($baseURI, $method, $params) {
 	}
 	return $method."&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $r));
 }
- 
-function buildAuthorizationHeader($oauth) {
-	$r = 'Authorization: OAuth ';
-	$values = array();
-	foreach($oauth as $key=>$value)
-	$values[] = "$key=\"" . rawurlencode($value) . "\"";
-	$r .= implode(', ', $values);
-	return $r;
+
+function buildAuthorizationHeader($oauth, $config) {
+        global $contenttype;
+        global $postfields;
+
+        if ($config['oauth_version'] == '1') {
+          $r = 'Authorization: OAuth ';
+          $values = array();
+          foreach($oauth as $key=>$value)
+            $values[] = "$key=\"" . rawurlencode($value) . "\"";
+          $r .= implode(', ', $values);
+
+        } else {
+
+          if ($config['oauth_access_token'] == '') {
+            $auth_string = rawurlencode($config['consumer_key']).':'.rawurlencode($config['consumer_secret']);
+            $r = 'Authorization: Basic '.base64_encode($auth_string);
+            $contenttype = 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8';
+            $postfields = 'grant_type=client_credentials';
+          }else{
+            $r = 'Authorization: Bearer '.$config['oauth_access_token'];
+          }
+        }
+       	return $r;
 }
- 
-// Set up the oauth Authorization array
+
 $oauth = array(
-	'oauth_consumer_key' => $config['consumer_key'],
-	'oauth_nonce' => time(),
-	'oauth_signature_method' => 'HMAC-SHA1',
-	'oauth_token' => $config['oauth_access_token'],
-	'oauth_timestamp' => time(),
-	'oauth_version' => '1.0'
-);
-	
+          'oauth_consumer_key' => $config['consumer_key'],
+          'oauth_nonce' => time(),
+          'oauth_signature_method' => 'HMAC-SHA1',
+          'oauth_token' => $config['oauth_access_token'],
+          'oauth_timestamp' => time(),
+          'oauth_version' => '1.0'
+         );
+
 $base_info = buildBaseString($base_url, 'GET', array_merge($oauth, $url_arguments));
 $composite_key = rawurlencode($config['consumer_secret']) . '&' . rawurlencode($config['oauth_access_token_secret']);
 $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
 $oauth['oauth_signature'] = $oauth_signature;
- 
+
 // Make Requests
 $header = array(
-	buildAuthorizationHeader($oauth), 
-	'Expect:'
+	buildAuthorizationHeader($oauth, $config)
 );
+
+if ($contenttype != '')
+  $header[] = $contenttype;
+
 $options = array(
 	CURLOPT_HTTPHEADER => $header,
-	//CURLOPT_POSTFIELDS => $postfields,
 	CURLOPT_HEADER => false,
 	CURLOPT_URL => $full_url,
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_SSL_VERIFYPEER => false
 );
- 
+
+if ($postfields != '')
+  $options[CURLOPT_POSTFIELDS] = $postfields;
+
 $feed = curl_init();
 curl_setopt_array($feed, $options);
 $result = curl_exec($feed);
