@@ -48,11 +48,3 @@
  dunque, è necessario hostare la directory COWS su un server web locale
  che permetta di raggiungere l'applicazione all'url indicato sopra.
 
- ** UTILIZZO **
-
- Le timeline che si inseriscono nell'applicazione sono contenute
- nell'array "twArray". Ogni timeline include l'array "tweets" che
- raccoglie i tweet della relativa timeline. Ogni tweet è rappresentato
- da un oggetto definito secondo le specifiche delle API di Twitter
- https://dev.twitter.com/docs/platform-objects/tweets
-

@@ -8,5 +8,7 @@ $(document).ready(function () {
     showApp();
     Twitter.createUserTimeline('me');
   }
+
+  $('.signin_btn').tooltip();
 });
 

@@ -10,6 +10,7 @@
   <link href="css/main.css" rel="stylesheet" type="text/css"/>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="vendor/jsrender.js"></script>
   <script type="text/javascript" src="js/utility.js"></script>
   <script type="text/javascript" src="js/twitter.js"></script>
@@ -33,7 +34,10 @@
     <span class="title">COWS</span>
     <div class="info"><b>C</b>lient di <b>O</b>ntologie e <b>W</b>eb <b>S</b>emantico<br><br>
     COWS is a Twitter read-only web client,<br> made with HTML5/CSS3/Javascript.</div>
-    <div class="twitter"><a id="twitter-signin" href="#"><img src="img/sign-in-with-twitter-gray.png"></a></div>
+    <br>
+    <button id="twitter-signin" class="btn btn-info signin_btn" type="button" data-toggle="tooltip" title="You can access home, public and protected timelines"><i class="icon-twitter"></i> Sign in with Twitter</button>
+    <button id="no-login" class="btn btn-success signin_btn" type="button" data-toggle="tooltip" title="You can access only public timelines"><i class="icon-chevron-right"></i> Continue without sign in</button>
+
     <div class="author">/* Author: Vittorio Cuculo */</div><br><br>
   </div>
 

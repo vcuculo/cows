@@ -3,11 +3,7 @@ body {
   font: 16px Tahoma, Helvetica, Arial, Sans-Serif;
 }
 
-.twitter {
-  margin-top: 20px;
-}
-
-.twitter img {
+.signin_btn {
   box-shadow: 3px 3px 7px #777;
 }
 
@@ -51,7 +47,6 @@ body {
 #timelines {
   margin: 50px;
 }
-
 
 .counter {
   font-weight: bold;

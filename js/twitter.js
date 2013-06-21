@@ -1,7 +1,9 @@
 
 const REQ_TOKEN_URL = "oauth/request_token";
-const AUTH_URL = "http://api.twitter.com/oauth/authenticate";
+const AUTH_URL = "https://api.twitter.com/oauth/authenticate";
 const ACCESS_URL = "oauth/access_token";
+
+const REQ_TOKEN_URL_V2 = "oauth2/token";
 
 const HOME_TIMELINE_URL = "1.1/statuses/home_timeline.json";
 const USER_TIMELINE_URL = "1.1/statuses/user_timeline.json";
@@ -20,10 +22,15 @@ function Twitter(name){
 }
 
 // static method
-Twitter.connect = function() {
+Twitter.connectOA1 = function() {
   // https://dev.twitter.com/docs/auth/implementing-sign-twitter
   OAuth1(REQ_TOKEN_URL, AUTH_URL, ACCESS_URL);
   OAuth1.step1();
+};
+
+Twitter.connectOA2 = function() {
+  OAuth2(REQ_TOKEN_URL_V2);
+  OAuth2.step1();
 };
 
 Twitter.disconnect = function() {

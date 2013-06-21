@@ -88,9 +88,16 @@ function logError(richiesta,stato,errori){
 
 $(document).on({
   click: function () {
-    Twitter.connect();
+    Twitter.connectOA1();
   }
 }, '#twitter-signin');
+
+$(document).on({
+  click: function () {
+    Twitter.connectOA2();
+  }
+}, '#no-login');
+
 
 $(document).on({
   click: function () {

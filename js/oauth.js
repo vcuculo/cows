@@ -1,9 +1,17 @@
 
+/*  OAuth v1.0A implementation
+ *  reqiured for Application-user authentication
+ *
+ *  https://dev.twitter.com/docs/auth/oauth 
+ */
+
+
 // https://tools.ietf.org/html/rfc5849
 function OAuth1(req_token_url, auth_url, access_url){
   OAuth1.req_token_url = req_token_url;
   OAuth1.auth_url = auth_url;
   OAuth1.access_url = access_url;
+  localStorage["oauth_version"] = 1;
 }
 
 $(document).ready(function () {
@@ -54,4 +62,28 @@ OAuth1.complete_oauth = function(result){
   }
   showApp();
   Twitter.createUserTimeline('me');
+}
+
+/*  OAuth v2.0 implementation
+ *  reqiured for Application-only authentication
+ *
+ *  https://dev.twitter.com/docs/auth/application-only-auth
+ */
+
+// http://tools.ietf.org/html/rfc6749
+function OAuth2(req_token_url){
+  OAuth2.req_token_url = req_token_url;
+  localStorage["oauth_version"] = 2;
+}
+
+OAuth2.step1 = function() {
+  sendRequest(OAuth2.req_token_url, "POST", OAuth2.step2, logError);
+}
+
+OAuth2.step2 = function(result){
+  console.log(result);
+  if (result.token_type == "bearer"){
+    localStorage["twitter_token"] = result.access_token;
+    showApp();
+  }
 }
